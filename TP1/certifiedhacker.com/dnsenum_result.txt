@@ -1,0 +1,69 @@
+AXFR record query failed: NOTIMP
+AXFR record query failed: NOTIMP
+dnsenum VERSION:1.2.6
+
+-----   certifiedhacker.com   -----
+
+
+Host's addresses:
+__________________
+
+certifiedhacker.com.                     6785     IN    A        162.241.216.11
+
+
+Name Servers:
+______________
+
+ns1.bluehost.com.                        83299    IN    A        162.159.24.80
+ns2.bluehost.com.                        83299    IN    A        162.159.25.175
+
+
+Mail (MX) Servers:
+___________________
+
+mail.certifiedhacker.com.                14400    IN    A        162.241.216.11
+
+
+Trying Zone Transfers and getting Bind Versions:
+_________________________________________________
+
+
+Trying Zone Transfer for certifiedhacker.com on ns2.bluehost.com ... 
+
+Trying Zone Transfer for certifiedhacker.com on ns1.bluehost.com ... 
+
+
+Brute forcing with /usr/share/dnsenum/dns.txt:
+_______________________________________________
+
+autodiscover.certifiedhacker.com.        14400    IN    A        162.241.216.11
+blog.certifiedhacker.com.                14400    IN    A        162.241.216.11
+ftp.certifiedhacker.com.                 14400    IN    A        162.241.216.11
+mail.certifiedhacker.com.                6769     IN    A        162.241.216.11
+pop.certifiedhacker.com.                 14400    IN    CNAME    mail.certifiedhacker.com.
+mail.certifiedhacker.com.                14400    IN    A        162.241.216.11
+smtp.certifiedhacker.com.                14400    IN    CNAME    mail.certifiedhacker.com.
+mail.certifiedhacker.com.                14400    IN    A        162.241.216.11
+webmail.certifiedhacker.com.             14400    IN    A        162.241.216.11
+www.certifiedhacker.com.                 14400    IN    CNAME    certifiedhacker.com.
+certifiedhacker.com.                     14400    IN    A        162.241.216.11
+
+
+certifiedhacker.com class C netranges:
+_______________________________________
+
+ 162.241.216.0/24
+
+
+Performing reverse lookup on 256 ip addresses:
+_______________________________________________
+
+
+0 results out of 256 IP addresses.
+
+
+certifiedhacker.com ip blocks:
+_______________________________
+
+
+done.
