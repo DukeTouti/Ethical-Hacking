@@ -1,0 +1,9 @@
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2026-10-10 14:04 +00
+Nmap scan report for 192.168.100.40
+Host is up (0.00087s latency).
+
+PORT   STATE  SERVICE
+23/tcp closed telnet
+MAC Address: B0:22:7A:DA:13:07 (HP)
+
+Nmap done: 1 IP address (1 host up) scanned in 13.13 seconds
