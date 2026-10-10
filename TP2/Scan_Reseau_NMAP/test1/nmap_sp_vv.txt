@@ -1,0 +1,20 @@
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2026-10-10 11:01 +00
+Initiating Ping Scan at 11:01
+Scanning 11 hosts [2 ports/host]
+Completed Ping Scan at 11:01, 1.40s elapsed (11 total hosts)
+Initiating Parallel DNS resolution of 2 hosts. at 11:01
+Completed Parallel DNS resolution of 2 hosts. at 11:02, 13.00s elapsed
+Nmap scan report for 192.168.100.35 [host down, received no-response]
+Nmap scan report for 192.168.100.36 [host down, received no-response]
+Nmap scan report for 192.168.100.37 [host down, received no-response]
+Nmap scan report for 192.168.100.38 [host down, received no-response]
+Nmap scan report for 192.168.100.39 [host down, received no-response]
+Nmap scan report for 192.168.100.40
+Host is up, received syn-ack (0.00072s latency).
+Nmap scan report for Taha-inspiron-16 (192.168.100.41)
+Host is up, received syn-ack (0.00026s latency).
+Nmap scan report for 192.168.100.42 [host down, received no-response]
+Nmap scan report for 192.168.100.43 [host down, received no-response]
+Nmap scan report for 192.168.100.44 [host down, received no-response]
+Nmap scan report for 192.168.100.45 [host down, received no-response]
+Nmap done: 11 IP addresses (2 hosts up) scanned in 14.40 seconds

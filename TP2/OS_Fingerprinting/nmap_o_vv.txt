@@ -1,0 +1,45 @@
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2026-10-10 14:23 +00
+Initiating ARP Ping Scan at 14:23
+Scanning 192.168.100.40 [1 port]
+Completed ARP Ping Scan at 14:23, 0.04s elapsed (1 total hosts)
+Initiating Parallel DNS resolution of 1 host. at 14:23
+Completed Parallel DNS resolution of 1 host. at 14:24, 13.00s elapsed
+Initiating SYN Stealth Scan at 14:24
+Scanning 192.168.100.40 [1000 ports]
+Discovered open port 80/tcp on 192.168.100.40
+Discovered open port 22/tcp on 192.168.100.40
+Completed SYN Stealth Scan at 14:24, 0.05s elapsed (1000 total ports)
+Initiating OS detection (try #1) against 192.168.100.40
+Nmap scan report for 192.168.100.40
+Host is up, received arp-response (0.00083s latency).
+Scanned at 2026-10-10 14:24:04 +00 for 1s
+Not shown: 998 closed tcp ports (reset)
+PORT   STATE SERVICE REASON
+22/tcp open  ssh     syn-ack ttl 64
+80/tcp open  http    syn-ack ttl 64
+MAC Address: B0:22:7A:DA:13:07 (HP)
+Device type: general purpose
+Running: Linux 5.X
+OS CPE: cpe:/o:linux:linux_kernel:5
+OS details: Linux 5.3 - 5.4
+TCP/IP fingerprint:
+OS:SCAN(V=7.94SVN%E=4%D=10/10%OT=22%CT=1%CU=41440%PV=Y%DS=1%DC=D%G=Y%M=B022
+OS:7A%TM=6ACA4A85%P=x86_64-pc-linux-gnu)SEQ(SP=108%GCD=1%ISR=10C%TI=Z%CI=Z%
+OS:II=I%TS=A)OPS(O1=M5B4ST11NWA%O2=M5B4ST11NWA%O3=M5B4NNT11NWA%O4=M5B4ST11N
+OS:WA%O5=M5B4ST11NWA%O6=M5B4ST11)WIN(W1=FE88%W2=FE88%W3=FE88%W4=FE88%W5=FE8
+OS:8%W6=FE88)ECN(R=Y%DF=Y%T=40%W=FAF0%O=M5B4NNSNWA%CC=Y%Q=)T1(R=Y%DF=Y%T=40
+OS:%S=O%A=S+%F=AS%RD=0%Q=)T2(R=N)T3(R=N)T4(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=
+OS:%RD=0%Q=)T5(R=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)T6(R=Y%DF=Y%T=40%
+OS:W=0%S=A%A=Z%F=R%O=%RD=0%Q=)T7(R=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=
+OS:)U1(R=Y%DF=N%T=40%IPL=164%UN=0%RIPL=G%RID=G%RIPCK=G%RUCK=G%RUD=G)IE(R=Y%
+OS:DFI=N%T=40%CD=S)
+
+Uptime guess: 39.587 days (since Tue Sep  1 01:19:06 2026)
+Network Distance: 1 hop
+TCP Sequence Prediction: Difficulty=264 (Good luck!)
+IP ID Sequence Generation: All zeros
+
+Read data files from: /usr/bin/../share/nmap
+OS detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 14.48 seconds
+           Raw packets sent: 1023 (45.806KB) | Rcvd: 1017 (42.438KB)
