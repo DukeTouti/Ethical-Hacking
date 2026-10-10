@@ -1,0 +1,4 @@
+nc: Address already in use
+Listening on 0.0.0.0 25
+Listening on 0.0.0.0 21
+Listening on 0.0.0.0 110
