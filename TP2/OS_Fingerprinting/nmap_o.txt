@@ -1,0 +1,16 @@
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2026-10-10 14:23 +00
+Nmap scan report for 192.168.100.40
+Host is up (0.00076s latency).
+Not shown: 998 closed tcp ports (reset)
+PORT   STATE SERVICE
+22/tcp open  ssh
+80/tcp open  http
+MAC Address: B0:22:7A:DA:13:07 (HP)
+Device type: general purpose
+Running: Linux 5.X
+OS CPE: cpe:/o:linux:linux_kernel:5
+OS details: Linux 5.3 - 5.4
+Network Distance: 1 hop
+
+OS detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 14.47 seconds
