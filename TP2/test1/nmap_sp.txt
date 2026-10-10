@@ -1,0 +1,6 @@
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2026-10-10 11:03 +00
+Nmap scan report for 192.168.100.40
+Host is up (0.00075s latency).
+Nmap scan report for Taha-inspiron-16 (192.168.100.41)
+Host is up (0.00025s latency).
+Nmap done: 11 IP addresses (2 hosts up) scanned in 14.41 seconds
