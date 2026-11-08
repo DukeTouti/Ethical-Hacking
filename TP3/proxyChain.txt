@@ -1,0 +1,134 @@
+!/bin/bash
+
+# Define paths
+#PROXYCHAINS_CONF="/etc/proxychains.conf"
+OUTPUT_FILE="/home/kali/nmap_scan_result.txt"  # Save results to home directory
+#PROXY_LIST_DIR="/home/kali/PROXY-List  # Adjust path if PROXY-List is located elsewhere
+
+# Ensure Nmap and ProxyChains are installed
+if ! command -v nmap &>/dev/null; then
+    echo "[!] Nmap is not installed. Install it with 'sudo apt install nmap'"
+    exit 1
+fi
+
+if ! command -v proxychains &>/dev/null; then
+    echo "[!] ProxyChains is not installed. Install it with 'sudo apt install proxychains4'"
+    exit 1
+fi
+
+# Get the target from the user
+read -p "Enter the target IP or domain: " TARGET
+
+# Prompt for proxy choice
+echo "Choose your proxy option:"
+echo "1. No Proxy"
+echo "2. Static Proxy (Select HTTP/SOCKS from list)"
+echo "3. Dynamic Proxy (Tor)"
+echo "4. ProxyChains with Custom Proxy List"
+read -p "Enter your choice [1-4]: " PROXY_CHOICE
+
+# Prompt for scan type
+echo "Choose your Nmap scan method:"
+echo "1. TCP Connect Scan (-sT)"
+echo "2. SYN Scan (-sS)"
+echo "3. Service Version Detection (-sV)"
+echo "4. Aggressive Scan (-A)"
+echo "5. OS Detection (-O)"
+echo "6. Comprehensive Scan (all options)"
+echo "7. Vulnerability scan (NSE Vuln Scripts)"
+read -p "Enter your choice [1-6]: " SCAN_CHOICE
+
+# Define scan type based on user choice
+case $SCAN_CHOICE in
+    1) SCAN_TYPE="-vv -sT" ;;
+    2) SCAN_TYPE="-vv -sS" ;;
+    3) SCAN_TYPE="-vv -sV" ;;
+    4) SCAN_TYPE="-vv -A" ;;
+    5) SCAN_TYPE="-vv -O" ;;
+    6) SCAN_TYPE="-sS -vv -sV -O -A" ;;
+    7) SCAN_TYPE="-vv --script vuln" ;;
+    *) echo "[!] Invalid scan choice. Exiting."; exit 1 ;;
+esac
+
+# Handle proxy configuration based on the user's choice
+case $PROXY_CHOICE in
+    1) # No Proxy
+        PROXY_COMMAND=""
+        ;;
+    2) # Static Proxy from the list
+        echo "Choose a proxy category:"
+        echo "1. HTTP"
+        echo "2. SOCKS4"
+        echo "3. SOCKS5"
+        read -p "Enter your choice [1-3]: " PROXY_CATEGORY
+
+        # Choose the proxy file based on user input
+        case $PROXY_CATEGORY in
+            1) PROXY_FILE="/home/kali/PROXY-List/http.txt" ;;
+            2) PROXY_FILE="/home/kali/PROXY-List/socks4.txt" ;;
+            3) PROXY_FILE="/home/kali/PROXY-List/socks5.txt" ;;
+            *) echo "[!] Invalid proxy category. Exiting."; exit 1 ;;
+        esac
+
+        # Check if the proxy file exists
+        if [ ! -f "$PROXY_FILE" ]; then
+            echo "[!] Proxy list file $PROXY_FILE not found. Exiting."
+            exit 1
+        fi
+
+        # Choose a random proxy from the selected proxy list
+        PROXY=$(shuf -n 1 "$PROXY_FILE")
+        IP=$(echo "$PROXY" | cut -d':' -f1)
+        PORT=$(echo "$PROXY" | cut -d':' -f2)
+        
+        echo "[+] Selected Proxy: $IP:$PORT"
+        
+	# Update ProxyChains config with the selected proxy
+        sudo cp "$PROXYCHAINS_CONF" "$PROXYCHAINS_CONF.bak"  # Backup original config
+        echo -e "strict_chain\nproxy_dns\nsocks5 $IP $PORT" | sudo tee "$PROXYCHAINS_CONF>
+        PROXY_COMMAND="proxychains"  # Run Nmap with ProxyChains
+        ;;
+    3) # Dynamic Proxy (Tor)
+        echo "[*] Starting Tor service (requires Tor installed)..."
+        if ! command -v tor &>/dev/null; then
+            echo "[!] Tor is not installed. Install it with 'sudo apt install tor'"
+            exit 1
+        fi
+        sudo service tor start
+        sudo cp "$PROXYCHAINS_CONF" "$PROXYCHAINS_CONF.bak"
+        echo -e "strict_chain\nproxy_dns\nsocks5 127.0.0.1 9050" | sudo tee "$PROXYCHAINS>
+        PROXY_COMMAND="proxychains"
+        ;;
+    4) # ProxyChains with Custom Proxy List
+        echo "[*] Running Nmap scan with ProxyChains using your custom proxy list in /etc>
+        PROXY_COMMAND="proxychains"
+        ;;
+
+    *)
+        echo "[!] Invalid proxy choice. Exiting."
+        exit 1
+        ;;
+esac
+
+# Run Nmap with the selected scan type and proxy command, save output to file
+echo "[*] Running Nmap scan for target $TARGET with scan type $SCAN_TYPE..."
+if [ "$PROXY_COMMAND" = "proxychains" ]; then
+    proxychains nmap $SCAN_TYPE "$TARGET" -oN "$OUTPUT_FILE"
+else
+    nmap $SCAN_TYPE "$TARGET" -oN "$OUTPUT_FILE"
+fi
+
+# Restore the original ProxyChains configuration
+if [ -f "$PROXYCHAINS_CONF.bak" ]; then
+    sudo mv "$PROXYCHAINS_CONF.bak" "$PROXYCHAINS_CONF"
+    echo "[*] ProxyChains configuration restored."
+fi
+
+# Check if the output file was created and confirm results
+if [ -f "$OUTPUT_FILE" ]; then
+    echo "[+] Scan results saved successfully at $OUTPUT_FILE"
+else
+    echo "[!] Scan failed to save results. Check permissions and configuration."
+fi
+
+
